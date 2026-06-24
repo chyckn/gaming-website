@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Hub - 22 Games & Leaderboards</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Gaming Hub</h1>
+            <p>22 Classic & Modern Games with Global Leaderboards</p>
+        </header>
+
+        <div class="nav-section">
+            <input type="text" id="searchGame" placeholder="🔍 Search games..." class="search-bar">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="classic">Classic</button>
+                <button class="filter-btn" data-filter="puzzle">Puzzle</button>
+                <button class="filter-btn" data-filter="action">Action</button>
+                <button class="filter-btn" data-filter="strategy">Strategy</button>
+            </div>
+        </div>
+
+        <main class="games-grid" id="gamesGrid">
+            <!-- Games will be loaded here -->
+        </main>
+    </div>
+
+    <div id="gameModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="gameContainer"></div>
+        </div>
+    </div>
+
+    <script src="js/games-data.js"></script>
+    <script src="js/leaderboard.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
