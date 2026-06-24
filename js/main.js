@@ -118,7 +118,7 @@ function getGameHTML(gameId) {
         'tic-tac-toe': `
             <div style="max-width: 300px; margin: 0 auto;">
                 <div id="tictactoeBoard" style="display: grid; grid-template-columns: repeat(3, 100px); gap: 5px; margin: 20px 0;">
-                    ${Array(9).fill(0).map((_, i) => `<button class="ttt-cell" data-index="${i}" style="width: 100px; height: 100px; font-size: 24px; cursor: pointer; border: 2px solid #667eea; background: white; border-radius: 5px;"></button>`).join('')}
+                    ${Array(9).fill(0).map((_, i) => `<button class="ttt-cell" data-index="${i}" style="width: 100px; height: 100px; font-size: 24px; cursor: pointer; border: 2px solid #667eea; background: white;">?</button>`).join('')}
                 </div>
                 <div id="tictactoeStatus" style="text-align: center; margin: 20px 0; font-size: 18px; font-weight: bold;">You are X</div>
                 <button id="resetTTT" style="width: 100%; padding: 10px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">New Game</button>
@@ -136,7 +136,7 @@ function getGameHTML(gameId) {
         'memory': `
             <div style="max-width: 400px; margin: 0 auto;">
                 <div id="memoryBoard" style="display: grid; grid-template-columns: repeat(4, 80px); gap: 10px; margin: 20px 0;">
-                    ${Array(16).fill(0).map((_, i) => `<button class="memory-card" data-index="${i}" style="width: 80px; height: 80px; font-size: 30px; cursor: pointer; border: 2px solid #667eea; background: #667eea; color: white; border-radius: 5px; transition: all 0.3s;">?</button>`).join('')}
+                    ${Array(16).fill(0).map((_, i) => `<button class="memory-card" data-index="${i}" style="width: 80px; height: 80px; font-size: 30px; cursor: pointer; border: 2px solid #667eea; background: #667eea; color: white;">?</button>`).join('')}
                 </div>
                 <div style="text-align: center; margin: 20px 0;">
                     <p>Matches: <span id="memoryMatches">0</span> / 8</p>
@@ -164,7 +164,7 @@ function getGameHTML(gameId) {
                     <button id="reset2048" style="padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">New Game</button>
                 </div>
                 <div id="game2048" style="background: #bbada0; border-radius: 5px; padding: 10px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
-                    ${Array(16).fill(0).map((_, i) => `<div class="tile-2048" data-index="${i}" style="background: #cdc1b4; border-radius: 5px; width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; color: #776e65; transition: all 0.1s;"></div>`).join('')}
+                    ${Array(16).fill(0).map((_, i) => `<div class="tile-2048" data-index="${i}" style="background: #cdc1b4; border-radius: 5px; width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: bold;"></div>`).join('')}
                 </div>
             </div>
         `,
@@ -175,18 +175,40 @@ function getGameHTML(gameId) {
                     <p>Wrong guesses: <span id="hangmanWrong">0</span> / 6</p>
                 </div>
                 <div id="hangmanLetters" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(40px, 1fr)); gap: 5px; margin: 20px 0;">
-                    ${Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ').map(letter => `<button class="hangman-letter" data-letter="${letter}" style="padding: 8px; background: #667eea; color: white; border: none; border-radius: 3px; cursor: pointer;">${letter}</button>`).join('')}
+                    ${Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ').map(letter => `<button class="hangman-letter" data-letter="${letter}" style="padding: 8px; background: #667eea; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">${letter}</button>`).join('')}
                 </div>
                 <div style="text-align: center;">
                     <button id="resetHangman" style="padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">New Game</button>
                 </div>
             </div>
         `,
+        'pong': `
+            <div style="text-align: center;">
+                <canvas id="pongCanvas" width="600" height="400" style="border: 2px solid #667eea; background: #000; border-radius: 5px; display:block; margin: 0 auto;"></canvas>
+                <div style="margin-top: 10px; display:flex; gap:10px; justify-content:center; align-items:center;">
+                    <p style="color:#fff;">Score: <span id="pongScore">0</span></p>
+                    <button id="resetPong" style="padding: 8px 12px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">New Game</button>
+                </div>
+                <p style="color:#ccc; font-size:0.9em; margin-top:8px;">Use mouse or arrow keys to move the paddle</p>
+            </div>
+        `,
+        'infinite-painter': `
+            <div style="text-align: center;">
+                <div style="display:flex; gap:10px; justify-content:center; margin-bottom:10px;">
+                    <input type="color" id="paintColor" value="#000000">
+                    <label style="color:#333">Brush: <input id="brushSize" type="range" min="1" max="50" value="5"></label>
+                    <button id="clearCanvas" style="padding: 6px 10px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Clear</button>
+                    <button id="saveCanvas" style="padding: 6px 10px; background: #34d399; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Save Image</button>
+                </div>
+                <canvas id="painterCanvas" width="800" height="500" style="border: 2px solid #667eea; background: #fff; border-radius: 5px; touch-action: none; max-width: 100%; height: auto;"></canvas>
+                <p style="color:#666; font-size:0.9em; margin-top:8px;">Draw with mouse or touch. Save your art as an image.</p>
+            </div>
+        `,
         'default': `
             <div style="text-align: center; padding: 40px;">
                 <p style="font-size: 24px; margin-bottom: 20px;">🎮 Game Coming Soon!</p>
                 <p>This game is being developed. Check back soon!</p>
-                <button onclick="location.reload()" style="margin-top: 20px; padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Go Back</button>
+                <button onclick="location.reload()" style="margin-top: 20px; padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Back</button>
             </div>
         `
     };
@@ -212,6 +234,12 @@ function initializeGame(gameId) {
             break;
         case 'hangman':
             initHangman();
+            break;
+        case 'pong':
+            initPong();
+            break;
+        case 'infinite-painter':
+            initInfinitePainter();
             break;
         default:
             console.log(`Game ${gameId} not yet implemented`);
@@ -640,3 +668,174 @@ function initHangman() {
 
     updateDisplay();
 }
+
+// Pong Game
+function initPong() {
+    const canvas = document.getElementById('pongCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const scoreDisplay = document.getElementById('pongScore');
+    const resetBtn = document.getElementById('resetPong');
+
+    let paddle = { x: canvas.width / 2 - 50, y: canvas.height - 20, width: 100, height: 10 };
+    let ball = { x: canvas.width / 2, y: canvas.height / 2, vx: 4, vy: -4, radius: 8 };
+    let score = 0;
+    let running = true;
+
+    function draw() {
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // paddle
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+
+        // ball
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // score
+        scoreDisplay.textContent = score;
+    }
+
+    function update() {
+        ball.x += ball.vx;
+        ball.y += ball.vy;
+
+        // wall collisions
+        if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) ball.vx *= -1;
+        if (ball.y - ball.radius < 0) ball.vy *= -1;
+
+        // paddle collision
+        if (ball.y + ball.radius > paddle.y && ball.x > paddle.x && ball.x < paddle.x + paddle.width) {
+            ball.vy *= -1;
+            score += 1;
+            scoreDisplay.textContent = score;
+            // add slight variation based on hit position
+            const hitPos = (ball.x - (paddle.x + paddle.width / 2)) / (paddle.width / 2);
+            ball.vx += hitPos * 0.5;
+        }
+
+        // bottom - game over
+        if (ball.y - ball.radius > canvas.height) {
+            running = false;
+            const playerName = localStorage.getItem('playerName') || 'Player';
+            try {
+                leaderboard.addScore('pong', playerName, score, new Date().toISOString());
+            } catch (e) {
+                console.error('Leaderboard add failed', e);
+            }
+            alert(`Game Over! Final Score: ${score}`);
+        }
+    }
+
+    function loop() {
+        if (!running) return;
+        update();
+        draw();
+        requestAnimationFrame(loop);
+    }
+
+    // controls
+    let isDragging = false;
+    canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        paddle.x = Math.max(0, Math.min(canvas.width - paddle.width, x - paddle.width / 2));
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') paddle.x = Math.max(0, paddle.x - 20);
+        if (e.key === 'ArrowRight') paddle.x = Math.min(canvas.width - paddle.width, paddle.x + 20);
+    });
+
+    resetBtn.addEventListener('click', () => {
+        paddle = { x: canvas.width / 2 - 50, y: canvas.height - 20, width: 100, height: 10 };
+        ball = { x: canvas.width / 2, y: canvas.height / 2, vx: 4, vy: -4, radius: 8 };
+        score = 0;
+        running = true;
+        loop();
+    });
+
+    // start
+    loop();
+}
+
+// Infinite Painter
+function initInfinitePainter() {
+    const canvas = document.getElementById('painterCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const colorInput = document.getElementById('paintColor');
+    const brushSize = document.getElementById('brushSize');
+    const clearBtn = document.getElementById('clearCanvas');
+    const saveBtn = document.getElementById('saveCanvas');
+
+    let drawing = false;
+
+    function resizeCanvas() {
+        // keep pixel ratio
+        const ratio = window.devicePixelRatio || 1;
+        const w = canvas.clientWidth;
+        const h = canvas.clientHeight;
+        canvas.width = w * ratio;
+        canvas.height = h * ratio;
+        ctx.scale(ratio, ratio);
+        ctx.lineCap = 'round';
+    }
+
+    function start(e) {
+        drawing = true;
+        draw(e);
+    }
+
+    function stop() {
+        drawing = false;
+        ctx.beginPath();
+    }
+
+    function draw(e) {
+        if (!drawing) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+        const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+        ctx.strokeStyle = colorInput.value;
+        ctx.lineWidth = brushSize.value;
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+    }
+
+    clearBtn.addEventListener('click', () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+
+    saveBtn.addEventListener('click', () => {
+        const url = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `art-${Date.now()}.png`;
+        a.click();
+    });
+
+    // mouse
+    canvas.addEventListener('mousedown', start);
+    canvas.addEventListener('mouseup', stop);
+    canvas.addEventListener('mouseout', stop);
+    canvas.addEventListener('mousemove', draw);
+
+    // touch
+    canvas.addEventListener('touchstart', start);
+    canvas.addEventListener('touchend', stop);
+    canvas.addEventListener('touchmove', draw);
+
+    window.addEventListener('resize', resizeCanvas);
+    // initialize
+    resizeCanvas();
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+}
+
+// (rest of file unchanged)
